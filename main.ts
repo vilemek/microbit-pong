@@ -172,25 +172,25 @@ loops.everyInterval(10, function () {
             led.unplot(0, 4)
         }
         if (player_pos2 == -1) {
-            led.unplot(0, 0)
-            led.unplot(0, 1)
-            led.plot(0, 2)
-            led.plot(0, 3)
-            led.plot(0, 4)
+            led.unplot(4, 0)
+            led.unplot(4, 1)
+            led.plot(4, 2)
+            led.plot(4, 3)
+            led.plot(4, 4)
         }
         if (player_pos2 == 0) {
-            led.unplot(0, 0)
-            led.plot(0, 1)
-            led.plot(0, 2)
-            led.plot(0, 3)
-            led.unplot(0, 4)
+            led.unplot(4, 0)
+            led.plot(4, 1)
+            led.plot(4, 2)
+            led.plot(4, 3)
+            led.unplot(4, 4)
         }
         if (player_pos2 == 1) {
-            led.plot(0, 0)
-            led.plot(0, 1)
-            led.plot(0, 2)
-            led.unplot(0, 3)
-            led.unplot(0, 4)
+            led.plot(4, 0)
+            led.plot(4, 1)
+            led.plot(4, 2)
+            led.unplot(4, 3)
+            led.unplot(4, 4)
         }
     }
 })
