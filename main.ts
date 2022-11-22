@@ -32,6 +32,14 @@ radio.onReceivedNumber(function (receivedNumber) {
                 `)
             player = 2
             game2 = 1
+            bx = 2
+            by = 2
+            while (dirx != 0) {
+                dirx = randint(-1, 1)
+            }
+            while (diry != 0) {
+                diry = randint(-1, 1)
+            }
         }
     } else if (game2 == 1) {
         if (player == 2) {
@@ -76,7 +84,7 @@ input.onButtonPressed(Button.A, function () {
             if (player_pos2 == -1) {
                 player_pos2 += 1
                 radio.sendNumber(201)
-            } else if (player_pos_1 == 0) {
+            } else if (player_pos2 == 0) {
                 player_pos2 += 1
                 radio.sendNumber(202)
             } else {
@@ -85,6 +93,10 @@ input.onButtonPressed(Button.A, function () {
         } else {
         	
         }
+    } else if (false) {
+    	
+    } else {
+    	
     }
 })
 input.onButtonPressed(Button.B, function () {
@@ -103,7 +115,7 @@ input.onButtonPressed(Button.B, function () {
             if (player_pos2 == 1) {
                 player_pos2 += -1
                 radio.sendNumber(201)
-            } else if (player_pos_1 == 0) {
+            } else if (player_pos2 == 0) {
                 player_pos2 += -1
                 radio.sendNumber(200)
             } else {
@@ -114,41 +126,79 @@ input.onButtonPressed(Button.B, function () {
         }
     }
 })
+input.onLogoEvent(TouchButtonEvent.Pressed, function () {
+    if (prep == 1) {
+        radio.setTransmitPower(7)
+        radio.setGroup(241)
+        basic.pause(100)
+        radio.sendNumber(1167)
+        while (game2 == 0) {
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . # . . .
+                . . . . .
+                . . . . .
+                `)
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . . # . .
+                . . . . .
+                . . . . .
+                `)
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . . . # .
+                . . . . .
+                . . . . .
+                `)
+        }
+        basic.clearScreen()
+        basic.pause(2500)
+        gamp = -1
+    }
+})
+let gamp = 0
 let player_pos2 = 0
 let player_pos_1 = 0
+let diry = 0
+let dirx = 0
+let by = 0
+let bx = 0
 let player = 0
 let game2 = 0
-radio.setTransmitPower(7)
-radio.setGroup(241)
-basic.pause(100)
-radio.sendNumber(1167)
-while (game2 == 0) {
-    basic.showLeds(`
-        . . . . .
-        . . . . .
-        . # . . .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . . . . .
-        . . # . .
-        . . . . .
-        . . . . .
-        `)
-    basic.showLeds(`
-        . . . . .
-        . . . . .
-        . . . # .
-        . . . . .
-        . . . . .
-        `)
-}
-if (game2 == 1) {
-	
-}
-loops.everyInterval(10, function () {
+let prep = 0
+prep = 1
+loops.everyInterval(1000, function () {
+    if (gamp == 1) {
+        led.unplot(bx, by)
+        if (bx == 3 || bx == 1) {
+            if (led.point(bx + dirx, by + diry)) {
+                if (dirx == 1) {
+                    dirx = -1
+                } else if (dirx == -1) {
+                    dirx = 1
+                } else {
+                	
+                }
+                if (diry == 1) {
+                    diry = -1
+                } else if (diry == -1) {
+                    diry = 1
+                } else {
+                	
+                }
+            }
+        } else if (false) {
+        	
+        } else {
+        	
+        }
+    }
+})
+loops.everyInterval(25, function () {
     if (game2 == 1) {
         if (player_pos_1 == -1) {
             led.unplot(0, 0)
