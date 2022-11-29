@@ -20,20 +20,79 @@ input.onButtonPressed(Button.B, function () {
     }
 })
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    gamp = -1
-    bx = 2
-    by = 2
-    while (dirx == 0) {
-        dirx = randint(-1, 1)
+    if (gamp == 0) {
+        gamp = -1
+        bx = 2
+        by = 2
+        while (dirx == 0) {
+            dirx = randint(-1, 1)
+        }
+        while (diry == 0) {
+            diry = randint(-1, 1)
+        }
+        gamp = 5
     }
-    while (diry == 0) {
-        diry = randint(-1, 1)
-    }
-    gamp = 1
 })
-loops.everyInterval(1000, function () {
+loops.everyInterval(2500, function () {
     if (gamp == 1) {
-        led.plot(bx, by)
+        led.unplot(bx, by)
+        if (dirx == 1) {
+            bx += 1
+            if (bx == 3) {
+                if (led.point(bx + dirx, by + diry)) {
+                    dirx = -1
+                    if (diry == 1) {
+                        diry = -1
+                    } else if (diry == -1) {
+                        diry = 1
+                    } else {
+                    	
+                    }
+                } else {
+                    gamp = 0
+                }
+            }
+        } else if (dirx == 1) {
+            bx += -1
+            if (bx == 1) {
+                if (led.point(bx + dirx, by + diry)) {
+                    dirx = 1
+                    if (diry == 1) {
+                        diry = -1
+                    } else if (diry == -1) {
+                        diry = 1
+                    } else {
+                    	
+                    }
+                } else {
+                    gamp = 0
+                }
+            }
+        } else {
+        	
+        }
+        if (diry == 1) {
+            by += 1
+            if (by == 5) {
+                diry = -1
+                by = 4
+            }
+        } else if (diry == -1) {
+            by += -1
+            if (by == -1) {
+                diry = 1
+                by = 0
+            }
+            led.plot(bx, by)
+        } else {
+        	
+        }
+    } else if (gamp == 5) {
+        led.plot(2, 2)
+        basic.pause(1000)
+        gamp = 1
+    } else {
+    	
     }
 })
 loops.everyInterval(25, function () {
