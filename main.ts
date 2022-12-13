@@ -7,6 +7,8 @@ let dirx = 0
 let diry = 0
 let bx1 = 0
 let by1 = 0
+let scr1 = 0
+let scr2 = 0
 input.onButtonPressed(Button.A, function () {
     if (player_pos_1 < 1) {
         player_pos_1 += 1
@@ -44,49 +46,51 @@ loops.everyInterval(2500, function () {
             bx += 1
         } else if (dirx == -1) {
             bx += -1
-        } else {
-        	
         }
-        if (bx == 3 || bx == 1) {
+        if (bx1 + dirx == 4 || bx == 4) {
             if (led.point(bx1 + dirx, by1 + diry)) {
                 if (diry == 1) {
                     diry = -1
                 } else if (diry == -1) {
                     diry = 1
                 }
-                if (dirx == 1) {
-                    dirx = -1
-                } else if (dirx == -1) {
-                    dirx = 1
-                }
+                dirx = -1
+                bx = 3
             } else {
-            	
+                scr1 += 1
+                gamp = 5
+                bx = 2
+                by = 2
+            }
+        }
+        if (bx1 + dirx == 0 || bx == 0) {
+            if (led.point(bx1 + dirx, by1 + diry)) {
+                if (diry == 1) {
+                    diry = -1
+                } else if (diry == -1) {
+                    diry = 1
+                }
+                dirx = 1
+                bx = 1
+            } else {
+                scr2 += 1
+                gamp = 5
+                bx = 2
+                by = 2
             }
         }
         if (diry == 1) {
-            if (by + diry >= 5) {
+            if (by1 + diry >= 5) {
                 diry = -1
+                by = 4
             }
             by += 1
         } else if (diry == -1) {
-            if (by + diry <= -1) {
-                diry = -1
+            if (by1 + diry <= -1) {
+                diry = 1
+                by = 0
             }
             by += -1
-        } else {
-        	
-        }
-        if (bx >= 4) {
-            dirx = -1
-        } else if (bx <= 0) {
-            dirx = 1
-        }
-        if (by >= 5) {
-            by = 4
-            diry = -1
-        } else if (by <= -1) {
-            by = 0
-            diry = 1
         }
         led.plot(bx, by)
     } else if (gamp == 5) {
